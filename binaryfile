@@ -1,0 +1,56 @@
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class BinaryFileExample {
+    public static void main(String[] args) {
+        String inputFileName = "input.bin";
+        String outputFileName = "output.bin";
+        String textFileName = "textfile.txt";
+
+        // Writing binary data using FileOutputStream
+        try {
+            FileOutputStream fos = new FileOutputStream(outputFileName);
+            fos.write("Hello, World!".getBytes());
+            fos.close();
+            System.out.println("Binary data has been written to " + outputFileName);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // Reading binary data using FileInputStream
+        try {
+            FileInputStream fis = new FileInputStream(outputFileName);
+            int byteRead;
+            System.out.print("Reading binary data: ");
+            while ((byteRead = fis.read()) != -1) {
+                System.out.print((char) byteRead);
+            }
+            fis.close();
+            System.out.println("\nBinary data has been read from " + outputFileName);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // Writing and reading text data using FileWriter and FileReader
+        try {
+            FileWriter writer = new FileWriter(textFileName);
+            writer.write("This is a text file.\nHello from Java!");
+            writer.close();
+            System.out.println("Text data has been written to " + textFileName);
+
+            FileReader reader = new FileReader(textFileName);
+            int charRead;
+            System.out.print("Reading text data: ");
+            while ((charRead = reader.read()) != -1) {
+                System.out.print((char) charRead);
+            }
+            reader.close();
+            System.out.println("\nText data has been read from " + textFileName);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
